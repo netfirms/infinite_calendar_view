@@ -49,6 +49,15 @@ List<Event> generateMultiDaysEvents() {
       color: Colors.orange.pastel,
       textColor: Colors.orange.onPastel,
     ),
+    // Test event for the issue with multi-day events spanning across weeks
+    Event(
+      title: "Test Event June 20-28",
+      description: "Test event spanning from June 20 to June 28",
+      startTime: DateTime(2025, 6, 20, 9),
+      endTime: DateTime(2025, 6, 28, 18),
+      color: Colors.purple.pastel,
+      textColor: Colors.purple.onPastel,
+    ),
   ];
 }
 
