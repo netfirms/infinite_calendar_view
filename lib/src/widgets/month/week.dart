@@ -216,6 +216,12 @@ class _WeekState extends State<Week> {
           }
         }
       }
+
+      // If this is not the first day of the multi-day event (daysIndex > 0),
+      // we should always render it regardless of whether it's been rendered in a previous day of this week
+      if (event.daysIndex != null && event.daysIndex! > 0) {
+        isMultiDayOtherDay = false;
+      }
     }
     if (event != null && !isMultiDayOtherDay) {
       // multi days events duration
