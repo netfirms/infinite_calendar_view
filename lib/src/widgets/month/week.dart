@@ -207,20 +207,19 @@ class _WeekState extends State<Week> {
     // Check if this event has already been rendered in a previous day of this week
     var isMultiDayOtherDay = false;
     if (event != null && event.isMultiDay) {
-      // For multi-day events, check if they've been rendered in a previous day of this week
-      if (dayOfWeek > 0) {
+      // If this is not the first day of the multi-day event (daysIndex > 0),
+      // we should always render it regardless of whether it's been rendered in a previous day of this week
+      if (event.daysIndex != null && event.daysIndex! > 0) {
+        isMultiDayOtherDay = false;
+      }
+      // For multi-day events that start in this week (daysIndex == 0), check if they've been rendered in a previous day of this week
+      else if (dayOfWeek > 0) {
         for (var prevDay = 0; prevDay < dayOfWeek; prevDay++) {
           if (weekShowedEvents[prevDay].any((e) => e?.uniqueId == event.uniqueId)) {
             isMultiDayOtherDay = true;
             break;
           }
         }
-      }
-
-      // If this is not the first day of the multi-day event (daysIndex > 0),
-      // we should always render it regardless of whether it's been rendered in a previous day of this week
-      if (event.daysIndex != null && event.daysIndex! > 0) {
-        isMultiDayOtherDay = false;
       }
     }
     if (event != null && !isMultiDayOtherDay) {
